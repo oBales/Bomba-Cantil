@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx33f7ra0gkwh"]
+
+[ext_resource type="PackedScene" uid="uid://ct6pawnwd4umw" path="res://Scenes/enemy.tscn" id="1_u0lkf"]
+[ext_resource type="Script" path="res://Scripts/Enemy_1.gd" id="2_0vnxs"]
+
+[node name="Personagem" instance=ExtResource("1_u0lkf")]
+script = ExtResource("2_0vnxs")
+
+[node name="Sprite2D" parent="." index="2"]
+modulate = Color(1, 0, 0, 1)
+
+[node name="Timer" parent="." index="4"]
+wait_time = 1.0
+
+[node name="Golpe" parent="E_Area2D2" index="0"]
+position = Vector2(48.25, 0)
+
+[node name="PlayerSprites" parent="." index="7"]
+modulate = Color(1, 0, 0, 1)

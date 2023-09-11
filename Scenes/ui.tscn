@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://bifgrnygcjhur"]
+
+[ext_resource type="Script" path="res://Scripts/P_Nome.gd" id="1_2ut4a"]
+[ext_resource type="Script" path="res://Scripts/P_Vida.gd" id="1_kwxtx"]
+[ext_resource type="Script" path="res://Scripts/E_Vida.gd" id="2_a8ul0"]
+[ext_resource type="Script" path="res://Scripts/Pontuacao.gd" id="2_cou4s"]
+[ext_resource type="Script" path="res://Scripts/E_Nome.gd" id="2_f6n3q"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Nome" type="GridContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="Jogador" type="GridContainer" parent="GridContainer/Nome"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="P_Nome" type="Label" parent="GridContainer/Nome/Jogador"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_2ut4a")
+
+[node name="Pontucao_Label" type="Label" parent="GridContainer/Nome/Jogador"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pontuação:"
+horizontal_alignment = 2
+
+[node name="Pontuacao" type="Label" parent="GridContainer/Nome/Jogador"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+script = ExtResource("2_cou4s")
+
+[node name="E_Nome" type="Label" parent="GridContainer/Nome"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_f6n3q")
+
+[node name="Vida" type="GridContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="P_Vida" type="ProgressBar" parent="GridContainer/Vida"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_kwxtx")
+
+[node name="E_Vida" type="ProgressBar" parent="GridContainer/Vida"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_a8ul0")

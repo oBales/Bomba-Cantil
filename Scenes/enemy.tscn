@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://ct6pawnwd4umw"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_a2hyf"]
+[ext_resource type="PackedScene" uid="uid://cynhwewhmoudh" path="res://Scenes/personagem.tscn" id="1_fj26x"]
+[ext_resource type="Texture2D" uid="uid://bpx8a8pq0gjvj" path="res://Images/player sprites.png" id="3_jsdrr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rso8y"]
+size = Vector2(17, 130)
+
+[sub_resource type="Animation" id="Animation_oiaeq"]
+resource_name = "Golpe"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_wj6ys"]
+resource_name = "Damage"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_3gn5w"]
+resource_name = "IDLE"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ub1r7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_t64ri"]
+resource_name = "Walk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 4, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7tkve"]
+_data = {
+"Attack": SubResource("Animation_oiaeq"),
+"Damage": SubResource("Animation_wj6ys"),
+"IDLE": SubResource("Animation_3gn5w"),
+"RESET": SubResource("Animation_ub1r7"),
+"Walk": SubResource("Animation_t64ri")
+}
+
+[node name="Personagem" instance=ExtResource("1_fj26x")]
+script = ExtResource("1_a2hyf")
+
+[node name="Sprite2D" parent="." index="2"]
+visible = false
+
+[node name="golpe_colisao" parent="." index="3"]
+metadata/_edit_lock_ = true
+
+[node name="Golpe" parent="golpe_colisao" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="Timer" parent="." index="4"]
+wait_time = 2.0
+
+[node name="E_Area2D2" type="Area2D" parent="." index="5"]
+metadata/_edit_lock_ = true
+
+[node name="Golpe" type="CollisionShape2D" parent="E_Area2D2" index="0"]
+position = Vector2(48.5, 0)
+shape = SubResource("RectangleShape2D_rso8y")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+autoplay = "IDLE"
+libraries = {
+"": SubResource("AnimationLibrary_7tkve")
+}
+
+[node name="PlayerSprites" type="Sprite2D" parent="." index="7"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("3_jsdrr")
+hframes = 3
+vframes = 6
+frame = 15
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="E_Area2D2" to="." method="_on_e_area_2d_2_body_entered"]
+[connection signal="body_exited" from="E_Area2D2" to="." method="_on_e_area_2d_2_body_exited"]

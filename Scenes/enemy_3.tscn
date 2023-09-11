@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3wc23xctoa0x"]
+
+[ext_resource type="PackedScene" uid="uid://ct6pawnwd4umw" path="res://Scenes/enemy.tscn" id="1_hpbww"]
+[ext_resource type="Script" path="res://Scripts/Enemy_3.gd" id="2_38op0"]
+
+[node name="Personagem" instance=ExtResource("1_hpbww")]
+script = ExtResource("2_38op0")
+
+[node name="Sprite2D" parent="." index="2"]
+modulate = Color(0, 1, 0, 1)
+
+[node name="Timer" parent="." index="4"]
+wait_time = 1.2
+
+[node name="PlayerSprites" parent="." index="7"]
+modulate = Color(0, 1, 0, 1)

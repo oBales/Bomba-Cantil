@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://cynhwewhmoudh"]
+
+[ext_resource type="Script" path="res://Personagens.gd" id="1_3k75n"]
+[ext_resource type="Texture2D" uid="uid://bwsqcxcwe0u1h" path="res://icon.svg" id="2_5j6jx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2lni"]
+size = Vector2(70.375, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxeft"]
+size = Vector2(5.5, 130)
+
+[node name="Personagem" type="CharacterBody2D"]
+script = ExtResource("1_3k75n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f2lni")
+
+[node name="corpo_colisao" type="Area2D" parent="."]
+scale = Vector2(1.1, 1.1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="corpo_colisao"]
+shape = SubResource("RectangleShape2D_f2lni")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5j6jx")
+metadata/_edit_lock_ = true
+
+[node name="golpe_colisao" type="Area2D" parent="."]
+
+[node name="Golpe" type="CollisionShape2D" parent="golpe_colisao"]
+position = Vector2(48.25, 0)
+shape = SubResource("RectangleShape2D_cxeft")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="golpe_colisao/Golpe"]
+visible = false
+z_index = 1
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_5j6jx")
+flip_v = true
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="body_entered" from="corpo_colisao" to="." method="_on_corpo_colisao_body_entered"]
+[connection signal="body_entered" from="golpe_colisao" to="." method="_on_golpe_colisao_body_entered"]
